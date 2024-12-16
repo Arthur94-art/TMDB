@@ -1,3 +1,4 @@
+import 'package:tmdb/core/api/api_paths.dart';
 import 'package:tmdb/core/api/client.dart';
 import 'package:tmdb/features/movies/data/models/movie_result_model.dart';
 

@@ -5,9 +5,13 @@ abstract class Failure {
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure(super.message);
+  const ServerFailure([super.message = 'Server failure']);
 }
 
-class CacheFailure extends Failure {
-  const CacheFailure(super.message);
+class NetworkFailure extends Failure {
+  const NetworkFailure([super.message = 'Network failure']);
+}
+
+class UnexpectedFailure extends Failure {
+  const UnexpectedFailure([super.message = 'Unexpected failure']);
 }

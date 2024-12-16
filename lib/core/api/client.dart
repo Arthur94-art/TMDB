@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:tmdb/core/api/api_paths.dart';
 
 class ApiClient {
   final Dio _dio;
 
-  ApiClient()
-      : _dio = Dio(BaseOptions(baseUrl: "https://api.themoviedb.org/3/"));
+  ApiClient() : _dio = Dio(BaseOptions(baseUrl: ApiPaths.domain));
 
   Future<Response> get(String endpoint,
       {Map<String, dynamic>? queryParams}) async {

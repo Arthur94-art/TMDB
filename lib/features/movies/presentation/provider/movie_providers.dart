@@ -23,7 +23,6 @@ final getMoviesUseCaseProvider = Provider<GetMoviesUsecase>((ref) {
 });
 
 // Paginated StateNotifier
-final paginatedMoviesProvider =
-    StateNotifierProvider<PaginatedMoviesNotifier, List<MovieEntity>>((ref) {
-  return PaginatedMoviesNotifier(ref.watch(getMoviesUseCaseProvider));
-});
+final paginatedMoviesProvider = StateNotifierProvider<PaginatedMoviesNotifier,
+        AsyncValue<List<MovieEntity>>>(
+    (ref) => PaginatedMoviesNotifier(ref.watch(getMoviesUseCaseProvider)));

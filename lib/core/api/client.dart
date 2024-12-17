@@ -36,7 +36,7 @@ class ApiClient {
     } else if (e.response != null) {
       throw ServerException('Error: ${e.response?.statusCode}');
     } else {
-      throw UnexpectedException('Unexpected DioError: ${e.message}');
+      throw UnexpectedException('Unknown error');
     }
   }
 }

@@ -13,13 +13,16 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getTopRatedMovies({int page = 1}) async {
-    final response = await _apiClient.get(
-      ApiPaths.topRatedMovies,
-      queryParams: {'page': page},
-    );
-
-    return (response.data['results'] as List)
-        .map((json) => MovieModel.fromJson(json))
-        .toList();
+    try {
+      final response = await _apiClient.get(
+        ApiPaths.topRatedMovies,
+        queryParams: {'page': page},
+      );
+      return (response.data['results'] as List)
+          .map((json) => MovieModel.fromJson(json))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/features/people/domain/entities/people_entity.dart';
 import 'package:tmdb/features/people/domain/usecases/people_usecase.dart';
@@ -15,19 +13,16 @@ class PaginatedPeopleNotifier extends StateNotifier<List<PeopleEntity>> {
     if (_isLoading) return;
 
     _isLoading = true;
-    try {
-      final result = await _useCase(PeopleParams(page: _page));
-      result.fold(
-        (failure) => log('+++: ${failure.message}'),
-        (movies) {
-          state = [...state, ...movies];
-          _page++;
-        },
-      );
-    } catch (e) {
-      log('Error: $e');
-    } finally {
-      _isLoading = false;
-    }
+    final result = await _useCase(PeopleParams(page: _page));
+    result.fold(
+      (failure) {
+        _isLoading = false;
+      },
+      (movies) {
+        _isLoading = false;
+        state = [...state, ...movies];
+        _page++;
+      },
+    );
   }
 }

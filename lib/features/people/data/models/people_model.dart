@@ -24,7 +24,7 @@ class PeopleModel extends PeopleEntity {
         name: json['name'],
         gender: json['gender'],
         popularity: json['popularity'],
-        image: json['profile_path'],
+        image: json['profile_path'] ?? '',
         knownForDepartment: json['known_for_department'],
         originalName: json['original_name'],
         adult: json['adult']);

@@ -1,7 +1,7 @@
 class PeopleEntity {
   final int id;
   final String name;
-  final String popularity;
+  final double popularity;
   final String image;
   PeopleEntity({
     required this.id,

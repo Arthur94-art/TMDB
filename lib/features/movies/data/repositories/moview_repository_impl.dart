@@ -6,15 +6,15 @@ import 'package:tmdb/features/movies/domain/entities/movie_entity.dart';
 import 'package:tmdb/features/movies/domain/repositories/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
-  final MovieRemoteDataSource remoteDataSource;
+  final MovieRemoteDataSource _remoteDataSource;
 
-  MovieRepositoryImpl(this.remoteDataSource);
+  MovieRepositoryImpl(this._remoteDataSource);
 
   @override
   Future<Either<Failure, List<MovieEntity>>> getTopRatedMovies(
       {int page = 1}) async {
     try {
-      final movies = await remoteDataSource.getTopRatedMovies(page: page);
+      final movies = await _remoteDataSource.getTopRatedMovies(page: page);
       return Right(movies);
     } catch (e) {
       final failure = ErrorMapper.mapExceptionToFailure(e as Exception);

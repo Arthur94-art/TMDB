@@ -94,15 +94,15 @@ class _TopRatedMoviesPageState extends ConsumerState<TopRatedMoviesPage> {
 
 class _PeoplePageHeader extends SliverPersistentHeaderDelegate {
   @override
-  double get minExtent => 100.0;
+  double get minExtent => 160.0;
   @override
-  double get maxExtent => 100.0;
+  double get maxExtent => 160.0;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return const SizedBox(
-      height: 100,
+      height: 160,
       child: PeoplePage(),
     );
   }

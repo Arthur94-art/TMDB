@@ -15,12 +15,11 @@ class MovieCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.white.withOpacity(0.9),
       ),
-      elevation: 4.0,
-      color: Colors.white.withOpacity(0.9),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/features/movies/presentation/pages/movies_page.dart';
+import 'package:tmdb/gen/assets.gen.dart';
 
 Future<void> main() async {
-  await dotenv.load(fileName: "assets/.env");
+  await dotenv.load(fileName: Assets.aEnv);
   runApp(const ProviderScope(child: Main()));
 }
 

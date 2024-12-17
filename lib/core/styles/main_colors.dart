@@ -1,5 +1,5 @@
 import 'dart:ui';
 
 class MainColors {
-  static const background = Color(0xff74b3ce);
+  static const background = Color.fromARGB(255, 41, 113, 144);
 }

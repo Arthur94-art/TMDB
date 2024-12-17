@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/gen/assets.gen.dart';
 
 class BannerWidget extends StatelessWidget {
   const BannerWidget({super.key});
@@ -7,13 +8,15 @@ class BannerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.yellowAccent,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Image.asset(
+            const $AssetsImagesGen().banner.path,
+            fit: BoxFit.cover,
+          ),
         ),
-        height: 200,
-        width: double.infinity,
       ),
     );
   }

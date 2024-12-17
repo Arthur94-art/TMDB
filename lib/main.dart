@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tmdb/features/movies/presentation/pages/movies_page.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: "assets/.env");
-  runApp(const Main());
+  runApp(const ProviderScope(child: Main()));
 }
 
 class Main extends StatelessWidget {
@@ -28,6 +30,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Container());
+    return const Scaffold(body: TopRatedMoviesPage());
   }
 }

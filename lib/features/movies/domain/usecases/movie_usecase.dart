@@ -4,10 +4,10 @@ import 'package:tmdb/core/usecases/usecase.dart';
 import 'package:tmdb/features/movies/domain/entities/movie_entity.dart';
 import 'package:tmdb/features/movies/domain/repositories/movie_repository.dart';
 
-class GetTopRatedMovies extends UseCase<List<MovieEntity>, TopRatedParams> {
+class GetMoviesUsecase extends UseCase<List<MovieEntity>, TopRatedParams> {
   final MovieRepository repository;
 
-  GetTopRatedMovies(this.repository);
+  GetMoviesUsecase(this.repository);
 
   @override
   Future<Either<Failure, List<MovieEntity>>> call(TopRatedParams params) async {

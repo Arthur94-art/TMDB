@@ -25,7 +25,7 @@ final movieUseCaseProvider = Provider<UseCase>((ref) {
 final topRatedMoviesProvider =
     FutureProvider.family<List<MovieEntity>, int>((ref, page) async {
   final useCase = ref.watch(movieUseCaseProvider);
-  return useCase.call(TopRatedParams(page: page)).then((result) {
+  return useCase(TopRatedParams(page: page)).then((result) {
     return result.fold(
       (failure) => throw Exception(failure.message),
       (movies) => movies,

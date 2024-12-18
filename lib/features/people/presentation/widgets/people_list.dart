@@ -4,15 +4,16 @@ import 'package:tmdb/core/styles/main_colors.dart';
 import 'package:tmdb/core/widgets/loader.dart';
 import 'package:tmdb/features/people/presentation/provider/people_providers.dart';
 import 'package:tmdb/features/people/presentation/widgets/people_card.dart';
+import 'package:tmdb/features/people/presentation/widgets/people_error_card.dart';
 
-class PeoplePage extends ConsumerStatefulWidget {
-  const PeoplePage({super.key});
+class PeopleList extends ConsumerStatefulWidget {
+  const PeopleList({super.key});
 
   @override
-  ConsumerState<PeoplePage> createState() => _PeoplePageState();
+  ConsumerState<PeopleList> createState() => _PeoplePageState();
 }
 
-class _PeoplePageState extends ConsumerState<PeoplePage> {
+class _PeoplePageState extends ConsumerState<PeopleList> {
   final ScrollController _scrollController = ScrollController();
   int? _selectedIndex;
 
@@ -88,9 +89,7 @@ class _PeoplePageState extends ConsumerState<PeoplePage> {
         ),
         loading: () => const CustomLoader(),
         error: (e, stackTrace) => Center(
-          child: ErrorPeopleCard(
-            message: '$e',
-          ),
+          child: ErrorPeopleCard(message: '$e'),
         ),
       ),
     );

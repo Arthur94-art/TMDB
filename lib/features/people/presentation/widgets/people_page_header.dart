@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/features/people/presentation/pages/people_page.dart';
+import 'package:tmdb/features/people/presentation/widgets/people_list.dart';
 
 class PeoplePageHeader extends SliverPersistentHeaderDelegate {
   @override
@@ -12,7 +12,7 @@ class PeoplePageHeader extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return const SizedBox(
       height: 160,
-      child: PeoplePage(),
+      child: PeopleList(),
     );
   }
 

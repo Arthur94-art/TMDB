@@ -25,18 +25,6 @@ class _TopRatedMoviesPageState extends ConsumerState<TopRatedMoviesPage> {
       ref.read(paginatedMoviesProvider.notifier).fetchNextPage();
     });
 
-    ref.listenManual<AsyncValue<List<MovieEntity>>>(
-      paginatedMoviesProvider,
-      (previous, next) {
-        if (next.hasError) {
-          final error = next.error.toString();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(error)),
-          );
-        }
-      },
-    );
-
     _scrollController.addListener(_onScroll);
   }
 
@@ -73,7 +61,7 @@ class _TopRatedMoviesPageState extends ConsumerState<TopRatedMoviesPage> {
               centerTitle: true,
               floating: true,
               pinned: true,
-              backgroundColor: Color(0xff032541),
+              backgroundColor: MainColors.appBar,
             ),
             const SliverToBoxAdapter(
               child: BannerWidget(),

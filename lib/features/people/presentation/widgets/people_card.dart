@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tmdb/core/api/api_paths.dart';
+import 'package:tmdb/core/styles/main_colors.dart';
 import 'package:tmdb/features/people/domain/entities/people_entity.dart';
 
 class PeopleCard extends StatelessWidget {
@@ -16,8 +18,9 @@ class PeopleCard extends StatelessWidget {
       child: Container(
         width: 100,
         decoration: BoxDecoration(
+          color: MainColors.appBar,
           border: isSelected
-              ? Border.all(color: const Color(0xff032541), width: 2.0)
+              ? Border.all(color: MainColors.appBar, width: 1.5)
               : null,
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -27,7 +30,7 @@ class PeopleCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: CachedNetworkImage(
-                imageUrl: 'https://image.tmdb.org/t/p/w200${person.image}',
+                imageUrl: '${ApiPaths.posterPath}${person.image}',
                 width: 100,
                 height: 100,
                 fit: BoxFit.cover,
@@ -46,12 +49,15 @@ class PeopleCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8.0),
-            Text(
-              person.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Text(
+                person.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 12.0),
+              ),
             ),
             Text(
               '${person.popularity}',

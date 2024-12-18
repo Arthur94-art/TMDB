@@ -14,13 +14,17 @@ class PeopleRemoteDataSourceImpl implements PeopleRemoteDataSource {
 
   @override
   Future<List<PeopleEntity>> getTopRatedMovies({int page = 1}) async {
-    final response = await _apiClient.get(
-      ApiPaths.popularPeople,
-      queryParams: {'page': page},
-    );
+    try {
+      final response = await _apiClient.get(
+        ApiPaths.popularPeople,
+        queryParams: {'page': page},
+      );
 
-    return (response.data['results'] as List)
-        .map((json) => PeopleModel.fromJson(json))
-        .toList();
+      return (response.data['results'] as List)
+          .map((json) => PeopleModel.fromJson(json))
+          .toList();
+    } catch (_) {
+      rethrow;
+    }
   }
 }

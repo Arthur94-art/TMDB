@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/core/styles/main_colors.dart';
-import 'package:tmdb/core/widgets/error_widget.dart';
 import 'package:tmdb/core/widgets/loader.dart';
 import 'package:tmdb/features/people/presentation/provider/people_providers.dart';
 import 'package:tmdb/features/people/presentation/widgets/people_card.dart';
@@ -89,11 +88,8 @@ class _PeoplePageState extends ConsumerState<PeoplePage> {
         ),
         loading: () => const CustomLoader(),
         error: (e, stackTrace) => Center(
-          child: ErrorPage(
-            text: '$e',
-            onRefresh: () {
-              ref.refresh(paginatedPeopleProvider.notifier).fetchNextPage();
-            },
+          child: ErrorPeopleCard(
+            message: '$e',
           ),
         ),
       ),

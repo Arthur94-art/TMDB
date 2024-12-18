@@ -19,6 +19,7 @@ class PaginatedPeopleNotifier
     result.fold(
       (failure) {
         _isLoading = false;
+        state = AsyncValue.error(failure.message, StackTrace.current);
       },
       (people) {
         final List<PeopleEntity> newPeople = [...state.value ?? [], ...people];

@@ -15,8 +15,6 @@ class MovieList extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final moviesState = ref.watch(paginatedMoviesProvider);
-        final isLoadingMore =
-            ref.watch(paginatedMoviesProvider.notifier).isLoadingMore;
 
         return moviesState.when(
           data: (movies) => SliverPadding(
@@ -40,7 +38,7 @@ class MovieList extends StatelessWidget {
                     rating: movie.voteAverage,
                   );
                 },
-                childCount: movies.length + (isLoadingMore ? 6 : 0),
+                childCount: movies.length + (false ? 6 : 0),
               ),
             ),
           ),

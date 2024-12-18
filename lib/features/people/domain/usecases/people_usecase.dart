@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:tmdb/core/error/failures.dart';
-import 'package:tmdb/core/usecases/usecase.dart';
+import 'package:tmdb/core/shared/domain/usecase.dart';
 import 'package:tmdb/features/people/domain/entities/people_entity.dart';
 import 'package:tmdb/features/people/domain/repositories/people_repository.dart';
 

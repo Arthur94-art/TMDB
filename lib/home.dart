@@ -5,7 +5,7 @@ import 'package:tmdb/core/styles/text_styles.dart';
 import 'package:tmdb/core/widgets/banner.dart';
 import 'package:tmdb/features/movies/presentation/provider/movie_providers.dart';
 import 'package:tmdb/features/movies/presentation/widgets/movies_list.dart';
-import 'package:tmdb/features/shared/presentation/widgets/people_page_header.dart';
+import 'package:tmdb/features/people/presentation/widgets/people_page_header.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});

@@ -1,22 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:tmdb/core/error/failures.dart';
-import 'package:tmdb/core/usecases/usecase.dart';
+import 'package:tmdb/core/shared/data/base_repository.dart';
+import 'package:tmdb/core/shared/domain/base_usecase.dart';
 import 'package:tmdb/features/movies/domain/entities/movie_entity.dart';
-import 'package:tmdb/features/movies/domain/repositories/movie_repository.dart';
 
-class GetMoviesUsecase extends UseCase<List<MovieEntity>, TopRatedParams> {
-  final MovieRepository repository;
+class GetMoviesUsecase extends BaseUsecase<MovieEntity, BaseParams> {
+  final BaseRepository<MovieEntity> _repository;
 
-  GetMoviesUsecase(this.repository);
+  GetMoviesUsecase(this._repository);
 
   @override
-  Future<Either<Failure, List<MovieEntity>>> call(TopRatedParams params) async {
-    return await repository.getTopRatedMovies(page: params.page);
+  Future<Either<Failure, List<MovieEntity>>> call(BaseParams params) async {
+    return await _repository.getItems(page: params.page);
   }
-}
-
-class TopRatedParams {
-  final int page;
-
-  TopRatedParams({required this.page});
 }

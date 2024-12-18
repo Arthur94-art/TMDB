@@ -12,7 +12,7 @@ final peopleRemoteDataSourceProvider = Provider<PeopleRemoteDataSource>((ref) {
   return PeopleRemoteDataSourceImpl(ref.watch(apiClientProvider));
 });
 
-// Repository
+// BaseRepository
 final peopleRepositoryProvider = Provider<PeopleRepository>((ref) {
   return PeopleRepositoryImpl(ref.watch(peopleRemoteDataSourceProvider));
 });

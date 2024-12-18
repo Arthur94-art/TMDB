@@ -68,7 +68,7 @@ class _PeoplePageState extends ConsumerState<PeoplePage> {
       body: SizedBox(
         height: 160,
         child: peopleList.isEmpty
-            ? const Center(child: CustomLoader())
+            ? const CustomLoader()
             : ListView.builder(
                 controller: _scrollController,
                 scrollDirection: Axis.horizontal,

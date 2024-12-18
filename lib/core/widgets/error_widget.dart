@@ -17,15 +17,15 @@ class ErrorPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.warning,
               size: 100,
-              color: Colors.yellow[600],
+              color: MainColors.ratingColor,
             ),
             Text(
               _text,
-              style: TextStyle(
-                color: Colors.red[100],
+              style: const TextStyle(
+                color: MainColors.errorColor,
                 fontSize: 20,
               ),
             ),
@@ -34,7 +34,7 @@ class ErrorPage extends StatelessWidget {
               icon: const Icon(
                 Icons.refresh,
                 size: 50,
-                color: Colors.white,
+                color: MainColors.cardColor,
               ),
             )
           ],

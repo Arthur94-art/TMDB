@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/core/styles/main_colors.dart';
-import 'package:tmdb/features/people/domain/entities/people_entity.dart';
 import 'package:tmdb/features/people/presentation/provider/people_providers.dart';
+import 'package:tmdb/features/people/presentation/widgets/people_card.dart';
 
 class PeoplePage extends ConsumerStatefulWidget {
   const PeoplePage({super.key});
@@ -78,64 +78,13 @@ class _PeoplePageState extends ConsumerState<PeoplePage> {
 
                   return GestureDetector(
                     onTap: () => _onCardTap(index),
-                    child: _PeopleCard(
+                    child: PeopleCard(
                       person: person,
                       isSelected: isSelected,
                     ),
                   );
                 },
               ),
-      ),
-    );
-  }
-}
-
-class _PeopleCard extends StatelessWidget {
-  final PeopleEntity person;
-  final bool isSelected;
-
-  const _PeopleCard({required this.person, this.isSelected = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-      child: Container(
-        width: 100,
-        decoration: BoxDecoration(
-          border: isSelected
-              ? Border.all(color: const Color(0xff032541), width: 2.0)
-              : null,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                'https://image.tmdb.org/t/p/w200${person.image}',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) =>
-                    const Icon(Icons.person, size: 100, color: Colors.grey),
-              ),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              person.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0),
-            ),
-            Text(
-              '${person.popularity}',
-              style: const TextStyle(fontSize: 10.0, color: Colors.grey),
-            ),
-          ],
-        ),
       ),
     );
   }

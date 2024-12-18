@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tmdb/core/api/api_paths.dart';
 
 class MovieCardWidget extends StatelessWidget {
@@ -32,6 +34,56 @@ class MovieCardWidget extends StatelessWidget {
   }
 }
 
+class CachedImage extends StatelessWidget {
+  final String? imageUrl;
+  final double borderRadius;
+
+  const CachedImage({
+    super.key,
+    required this.imageUrl,
+    this.borderRadius = 0.0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: imageUrl != null
+          ? CachedNetworkImage(
+              imageUrl: imageUrl!,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: Container(
+                  color: Colors.grey[300],
+                ),
+              ),
+              errorWidget: (context, url, error) => Container(
+                color: Colors.grey[300],
+                child: const Center(
+                  child: Icon(
+                    Icons.broken_image,
+                    size: 40,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            )
+          : Container(
+              color: Colors.grey[300],
+              child: const Center(
+                child: Icon(
+                  Icons.movie,
+                  size: 40,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+    );
+  }
+}
+
 class _MoviePoster extends StatelessWidget {
   final String? posterPath;
 
@@ -40,21 +92,10 @@ class _MoviePoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(8.0)),
-        child: posterPath != null
-            ? Image.network(
-                '${ApiPaths.posterPath}$posterPath',
-                fit: BoxFit.cover,
-              )
-            : Container(
-                color: Colors.grey[300],
-                child: const Icon(
-                  Icons.movie,
-                  size: 40,
-                  color: Colors.grey,
-                ),
-              ),
+      child: CachedImage(
+        imageUrl:
+            posterPath != null ? '${ApiPaths.posterPath}$posterPath' : null,
+        borderRadius: 8.0,
       ),
     );
   }
@@ -68,16 +109,15 @@ class _MovieTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      padding: const EdgeInsets.all(8.0),
       child: Text(
         title,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 14.0,
-        ),
       ),
     );
   }
@@ -91,15 +131,14 @@ class _MovieRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.star, size: 16.0, color: Colors.amber),
-          const SizedBox(width: 4.0),
+          const Icon(Icons.star, color: Colors.amber, size: 16),
+          const SizedBox(width: 4),
           Text(
             rating.toStringAsFixed(1),
-            style: const TextStyle(fontSize: 12.0),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ],
       ),

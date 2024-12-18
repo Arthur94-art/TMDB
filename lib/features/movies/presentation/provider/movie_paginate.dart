@@ -39,7 +39,7 @@ class PaginatedMoviesNotifier
       state = AsyncValue.error(e.toString(), StackTrace.current);
     } finally {
       _isLoading = false;
-      isLoadingMore = false;
+      isLoadingMore = true;
     }
   }
 }

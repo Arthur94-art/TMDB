@@ -23,7 +23,7 @@ final getPeopleUseCaseProvider = Provider<GetPeopleUsecase>((ref) {
 });
 
 // Paginated StateNotifier
-final paginatedPeopleProvider =
-    StateNotifierProvider<PaginatedPeopleNotifier, List<PeopleEntity>>((ref) {
+final paginatedPeopleProvider = StateNotifierProvider<PaginatedPeopleNotifier,
+    AsyncValue<List<PeopleEntity>>>((ref) {
   return PaginatedPeopleNotifier(ref.watch(getPeopleUseCaseProvider));
 });

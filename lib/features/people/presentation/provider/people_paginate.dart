@@ -2,12 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/features/people/domain/entities/people_entity.dart';
 import 'package:tmdb/features/people/domain/usecases/people_usecase.dart';
 
-class PaginatedPeopleNotifier extends StateNotifier<List<PeopleEntity>> {
+class PaginatedPeopleNotifier
+    extends StateNotifier<AsyncValue<List<PeopleEntity>>> {
   final GetPeopleUsecase _useCase;
   int _page = 1;
   bool _isLoading = false;
 
-  PaginatedPeopleNotifier(this._useCase) : super([]);
+  PaginatedPeopleNotifier(this._useCase)
+      : super(const AsyncValue<List<PeopleEntity>>.data([]));
 
   Future<void> fetchNextPage() async {
     if (_isLoading) return;
@@ -18,9 +20,10 @@ class PaginatedPeopleNotifier extends StateNotifier<List<PeopleEntity>> {
       (failure) {
         _isLoading = false;
       },
-      (movies) {
+      (people) {
+        final List<PeopleEntity> newPeople = [...state.value ?? [], ...people];
         _isLoading = false;
-        state = [...state, ...movies];
+        state = AsyncValue.data(newPeople);
         _page++;
       },
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/core/styles/main_colors.dart';
+import 'package:tmdb/core/widgets/error_widget.dart';
 import 'package:tmdb/core/widgets/loader.dart';
 import 'package:tmdb/features/people/presentation/provider/people_providers.dart';
 import 'package:tmdb/features/people/presentation/widgets/people_card.dart';
@@ -61,31 +62,40 @@ class _PeoplePageState extends ConsumerState<PeoplePage> {
 
   @override
   Widget build(BuildContext context) {
-    final peopleList = ref.watch(paginatedPeopleProvider);
+    final peopleState = ref.watch(paginatedPeopleProvider);
 
     return Scaffold(
       backgroundColor: MainColors.background,
-      body: SizedBox(
-        height: 160,
-        child: peopleList.isEmpty
-            ? const CustomLoader()
-            : ListView.builder(
-                controller: _scrollController,
-                scrollDirection: Axis.horizontal,
-                itemCount: peopleList.length,
-                itemBuilder: (context, index) {
-                  final person = peopleList[index];
-                  final isSelected = index == _selectedIndex;
+      body: peopleState.when(
+        data: (peopleList) => SizedBox(
+          height: 160,
+          child: ListView.builder(
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            itemCount: peopleList.length,
+            itemBuilder: (context, index) {
+              final person = peopleList[index];
+              final isSelected = index == _selectedIndex;
 
-                  return GestureDetector(
-                    onTap: () => _onCardTap(index),
-                    child: PeopleCard(
-                      person: person,
-                      isSelected: isSelected,
-                    ),
-                  );
-                },
-              ),
+              return GestureDetector(
+                onTap: () => _onCardTap(index),
+                child: PeopleCard(
+                  person: person,
+                  isSelected: isSelected,
+                ),
+              );
+            },
+          ),
+        ),
+        loading: () => const CustomLoader(),
+        error: (e, stackTrace) => Center(
+          child: ErrorPage(
+            text: '$e',
+            onRefresh: () {
+              ref.refresh(paginatedPeopleProvider.notifier).fetchNextPage();
+            },
+          ),
+        ),
       ),
     );
   }

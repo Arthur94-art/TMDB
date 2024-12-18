@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tmdb/core/api/api_paths.dart';
 import 'package:tmdb/core/styles/main_colors.dart';
+import 'package:tmdb/core/styles/text_styles.dart';
 import 'package:tmdb/features/people/domain/entities/people_entity.dart';
 
 class PeopleCard extends StatelessWidget {
@@ -35,16 +36,16 @@ class PeopleCard extends StatelessWidget {
                 height: 100,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Shimmer.fromColors(
-                  baseColor: Colors.grey[300]!,
-                  highlightColor: Colors.grey[100]!,
+                  baseColor: MainColors.c8C8C8,
+                  highlightColor: MainColors.f0f0f0,
                   child: Container(
-                    color: Colors.grey[300],
+                    color: MainColors.c8C8C8,
                   ),
                 ),
                 errorWidget: (context, url, error) => const Icon(
                   Icons.person,
                   size: 100,
-                  color: Colors.grey,
+                  color: MainColors.grey808080,
                 ),
               ),
             ),
@@ -55,18 +56,18 @@ class PeopleCard extends StatelessWidget {
                 person.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 12.0),
+                style: CustomTextStyles.textStyle12,
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(Icons.star, color: Colors.amber, size: 8),
+                const Icon(Icons.star, color: MainColors.ratingColor, size: 8),
                 const SizedBox(width: 4),
                 Text(
                   person.popularity.toStringAsFixed(1),
-                  style: const TextStyle(fontSize: 10.0, color: Colors.grey),
+                  style: CustomTextStyles.textStyle10,
                 ),
               ],
             ),

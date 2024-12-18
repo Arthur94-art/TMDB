@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/core/styles/main_colors.dart';
+import 'package:tmdb/core/styles/text_styles.dart';
 import 'package:tmdb/core/widgets/banner.dart';
 import 'package:tmdb/core/widgets/error_widget.dart';
 import 'package:tmdb/core/widgets/loader.dart';
@@ -58,7 +59,10 @@ class _TopRatedMoviesPageState extends ConsumerState<TopRatedMoviesPage> {
           controller: _scrollController,
           slivers: [
             const SliverAppBar(
-              title: Text('Movies'),
+              title: Text(
+                'Movies',
+                style: CustomTextStyles.textStyle16,
+              ),
               centerTitle: true,
               floating: true,
               pinned: true,

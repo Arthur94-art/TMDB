@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tmdb/core/api/api_paths.dart';
 import 'package:tmdb/core/styles/main_colors.dart';
+import 'package:tmdb/core/styles/text_styles.dart';
 
 class MovieCardWidget extends StatelessWidget {
   final String? posterPath;
@@ -22,14 +23,20 @@ class MovieCardWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: MainColors.cardColor,
+        border: Border.all(
+          color: MainColors.cardColor,
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _MoviePoster(posterPath: posterPath),
-          _MovieTitle(title: title),
-          _MovieRating(rating: rating),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(1.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _MoviePoster(posterPath: posterPath),
+            _MovieTitle(title: title),
+            _MovieRating(rating: rating),
+          ],
+        ),
       ),
     );
   }
@@ -54,30 +61,30 @@ class CachedImage extends StatelessWidget {
               imageUrl: imageUrl!,
               fit: BoxFit.cover,
               placeholder: (context, url) => Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
+                baseColor: MainColors.c8C8C8,
+                highlightColor: MainColors.f0f0f0,
                 child: Container(
-                  color: Colors.grey[300],
+                  color: MainColors.c8C8C8,
                 ),
               ),
               errorWidget: (context, url, error) => Container(
-                color: Colors.grey[300],
+                color: MainColors.c8C8C8,
                 child: const Center(
                   child: Icon(
                     Icons.broken_image,
                     size: 40,
-                    color: Colors.grey,
+                    color: MainColors.grey808080,
                   ),
                 ),
               ),
             )
           : Container(
-              color: Colors.grey[300],
+              color: MainColors.c8C8C8,
               child: const Center(
                 child: Icon(
                   Icons.movie,
                   size: 40,
-                  color: Colors.grey,
+                  color: MainColors.grey808080,
                 ),
               ),
             ),
@@ -113,10 +120,7 @@ class _MovieTitle extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Text(
         title,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+        style: CustomTextStyles.textStyle12bold,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
@@ -135,11 +139,11 @@ class _MovieRating extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Row(
         children: [
-          const Icon(Icons.star, color: Colors.amber, size: 16),
+          const Icon(Icons.star, color: MainColors.ratingColor, size: 16),
           const SizedBox(width: 4),
           Text(
             rating.toStringAsFixed(1),
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            style: CustomTextStyles.textStyle12,
           ),
         ],
       ),

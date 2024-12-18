@@ -7,7 +7,7 @@ class PaginatedMoviesNotifier
   final GetMoviesUsecase _useCase;
   int _page = 1;
   bool _isLoading = false;
-  bool isLoadingMore = false; // Додатковий стан для пагінації
+  bool isLoadingMore = false;
 
   PaginatedMoviesNotifier(this._useCase)
       : super(const AsyncValue<List<MovieEntity>>.data([]));
@@ -18,9 +18,9 @@ class PaginatedMoviesNotifier
     _isLoading = true;
 
     if (_page == 1) {
-      state = const AsyncValue.loading(); // Лоадер лише для першої сторінки
+      state = const AsyncValue.loading();
     } else {
-      isLoadingMore = true; // Встановлюємо стан для підвантаження
+      isLoadingMore = true;
     }
 
     try {

@@ -38,7 +38,7 @@ class MovieList extends StatelessWidget {
                     rating: movie.voteAverage,
                   );
                 },
-                childCount: movies.length + (false ? 6 : 0),
+                childCount: movies.length,
               ),
             ),
           ),

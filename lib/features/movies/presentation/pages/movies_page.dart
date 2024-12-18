@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/core/styles/main_colors.dart';
 import 'package:tmdb/core/widgets/banner.dart';
 import 'package:tmdb/core/widgets/error_widget.dart';
+import 'package:tmdb/core/widgets/loader.dart';
 import 'package:tmdb/features/movies/domain/entities/movie_entity.dart';
 import 'package:tmdb/features/movies/presentation/provider/movie_providers.dart';
 import 'package:tmdb/features/movies/presentation/widgets/movie_card.dart';
@@ -61,7 +62,7 @@ class _TopRatedMoviesPageState extends ConsumerState<TopRatedMoviesPage> {
               centerTitle: true,
               floating: true,
               pinned: true,
-              backgroundColor: MainColors.appBar,
+              backgroundColor: MainColors.cardColor,
             ),
             const SliverToBoxAdapter(
               child: BannerWidget(),
@@ -98,7 +99,7 @@ class _TopRatedMoviesPageState extends ConsumerState<TopRatedMoviesPage> {
             )
           ],
         ),
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const CustomLoader(),
         error: (e, stackTrace) => Center(
           child: ErrorPage(
             text: '$e',

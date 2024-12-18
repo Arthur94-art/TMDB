@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/core/styles/main_colors.dart';
+import 'package:tmdb/core/widgets/loader.dart';
 import 'package:tmdb/features/people/presentation/provider/people_providers.dart';
 import 'package:tmdb/features/people/presentation/widgets/people_card.dart';
 
@@ -67,7 +68,7 @@ class _PeoplePageState extends ConsumerState<PeoplePage> {
       body: SizedBox(
         height: 160,
         child: peopleList.isEmpty
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(child: CustomLoader())
             : ListView.builder(
                 controller: _scrollController,
                 scrollDirection: Axis.horizontal,

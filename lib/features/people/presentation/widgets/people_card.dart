@@ -18,9 +18,9 @@ class PeopleCard extends StatelessWidget {
       child: Container(
         width: 100,
         decoration: BoxDecoration(
-          color: MainColors.appBar,
+          color: MainColors.cardColor,
           border: isSelected
-              ? Border.all(color: MainColors.appBar, width: 1.5)
+              ? Border.all(color: MainColors.cardColor, width: 1.5)
               : null,
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -59,9 +59,16 @@ class PeopleCard extends StatelessWidget {
                     fontWeight: FontWeight.bold, fontSize: 12.0),
               ),
             ),
-            Text(
-              '${person.popularity}',
-              style: const TextStyle(fontSize: 10.0, color: Colors.grey),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.star, color: Colors.amber, size: 8),
+                const SizedBox(width: 4),
+                Text(
+                  person.popularity.toStringAsFixed(1),
+                  style: const TextStyle(fontSize: 10.0, color: Colors.grey),
+                ),
+              ],
             ),
           ],
         ),

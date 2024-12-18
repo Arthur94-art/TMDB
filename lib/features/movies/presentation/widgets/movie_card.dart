@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tmdb/core/api/api_paths.dart';
+import 'package:tmdb/core/styles/main_colors.dart';
 
 class MovieCardWidget extends StatelessWidget {
   final String? posterPath;
@@ -20,7 +21,7 @@ class MovieCardWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.white.withOpacity(0.9),
+        color: MainColors.cardColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

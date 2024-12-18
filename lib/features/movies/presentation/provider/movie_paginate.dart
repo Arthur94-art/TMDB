@@ -16,7 +16,6 @@ class PaginatedMoviesNotifier
     if (_isLoading) return;
 
     _isLoading = true;
-
     if (_page == 1) {
       state = const AsyncValue.loading();
     } else {

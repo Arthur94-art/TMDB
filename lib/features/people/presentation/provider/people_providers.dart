@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tmdb/core/providers/api_client_provider.dart';
 import 'package:tmdb/core/shared/data/base_remote_data_source.dart';
 import 'package:tmdb/core/shared/data/base_repository.dart';
 import 'package:tmdb/core/shared/domain/base_usecase.dart';
+import 'package:tmdb/core/shared/providers/api_client_provider.dart';
 import 'package:tmdb/features/people/data/datasources/people_remote_data_source.dart';
 import 'package:tmdb/features/people/data/models/people_model.dart';
 import 'package:tmdb/features/people/data/repositories/people_repository_impl.dart';

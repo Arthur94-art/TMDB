@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tmdb/core/styles/main_colors.dart';
 import 'package:tmdb/core/widgets/shimmer.dart';
 import 'package:tmdb/features/movies/presentation/provider/movie_providers.dart';
 import 'package:tmdb/features/movies/presentation/widgets/movie_card.dart';
+import 'package:tmdb/features/movies/presentation/widgets/movie_error_widget.dart';
 
 class MovieList extends StatelessWidget {
   final ScrollController scrollController;
@@ -33,6 +33,7 @@ class MovieList extends StatelessWidget {
                   }
                   final movie = movies[index];
                   return MovieCardWidget(
+                    key: ValueKey(movie.id),
                     posterPath: movie.posterPath,
                     title: movie.title,
                     rating: movie.voteAverage,
@@ -58,7 +59,7 @@ class MovieList extends StatelessWidget {
             ),
           ),
           error: (e, stackTrace) => SliverToBoxAdapter(
-            child: _BuildErrorWidget(
+            child: MovieErrorWidget(
               error: e,
               onRefresh: () {
                 ref.refresh(paginatedMoviesProvider.notifier).fetchNextPage();
@@ -67,44 +68,6 @@ class MovieList extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _BuildErrorWidget extends StatelessWidget {
-  final Object _error;
-  final VoidCallback _onRefresh;
-  const _BuildErrorWidget(
-      {required Object error, required VoidCallback onRefresh})
-      : _error = error,
-        _onRefresh = onRefresh;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Icon(
-          Icons.warning,
-          size: 50,
-          color: MainColors.ratingColor,
-        ),
-        Text(
-          '$_error',
-          style: const TextStyle(
-            color: MainColors.errorColor,
-            fontSize: 20,
-          ),
-        ),
-        IconButton(
-          onPressed: _onRefresh,
-          icon: const Icon(
-            Icons.refresh,
-            size: 40,
-            color: MainColors.cardColor,
-          ),
-        )
-      ],
     );
   }
 }

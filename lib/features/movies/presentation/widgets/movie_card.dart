@@ -42,12 +42,11 @@ class MovieCardWidget extends StatelessWidget {
   }
 }
 
-class CachedImage extends StatelessWidget {
+class _CachedImage extends StatelessWidget {
   final String? imageUrl;
   final double borderRadius;
 
-  const CachedImage({
-    super.key,
+  const _CachedImage({
     required this.imageUrl,
     this.borderRadius = 0.0,
   });
@@ -100,7 +99,7 @@ class _MoviePoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: CachedImage(
+      child: _CachedImage(
         imageUrl:
             posterPath != null ? '${ApiPaths.posterPath}$posterPath' : null,
         borderRadius: 8.0,

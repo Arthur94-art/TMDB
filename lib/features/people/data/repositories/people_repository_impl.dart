@@ -7,7 +7,7 @@ import 'package:tmdb/core/shared/data/base_repository.dart';
 import 'package:tmdb/features/people/data/models/people_model.dart';
 import 'package:tmdb/features/people/domain/entities/people_entity.dart';
 
-class PeopleRepositoryImpl extends BaseRepository<PeopleEntity> {
+class PeopleRepositoryImpl implements BaseRepository<PeopleEntity> {
   final BaseRemoteDataSource<PeopleModel> _dataSource;
   PeopleRepositoryImpl(this._dataSource);
   @override

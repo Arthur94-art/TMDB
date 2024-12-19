@@ -49,7 +49,7 @@ class _PeoplePageState extends ConsumerState<PeopleList> {
 
     _scrollController.animateTo(
       targetOffset,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOut,
     );
   }
@@ -80,6 +80,7 @@ class _PeoplePageState extends ConsumerState<PeopleList> {
               return GestureDetector(
                 onTap: () => _onCardTap(index),
                 child: PeopleCard(
+                  key: ValueKey(person.id),
                   person: person,
                   isSelected: isSelected,
                 ),

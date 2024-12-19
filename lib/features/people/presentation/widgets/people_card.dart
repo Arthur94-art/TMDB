@@ -7,10 +7,15 @@ import 'package:tmdb/core/styles/text_styles.dart';
 import 'package:tmdb/features/people/domain/entities/people_entity.dart';
 
 class PeopleCard extends StatelessWidget {
-  final PeopleEntity person;
-  final bool isSelected;
+  final PeopleEntity _person;
+  final bool _isSelected;
 
-  const PeopleCard({super.key, required this.person, this.isSelected = false});
+  const PeopleCard({
+    super.key,
+    required PeopleEntity person,
+    bool isSelected = false,
+  })  : _isSelected = isSelected,
+        _person = person;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class PeopleCard extends StatelessWidget {
         width: 100,
         decoration: BoxDecoration(
           color: MainColors.cardColor,
-          border: isSelected
+          border: _isSelected
               ? Border.all(color: MainColors.cardColor, width: 1.5)
               : null,
           borderRadius: BorderRadius.circular(8.0),
@@ -31,7 +36,7 @@ class PeopleCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: CachedNetworkImage(
-                imageUrl: '${ApiPaths.posterPath}${person.image}',
+                imageUrl: '${ApiPaths.posterPath}${_person.image}',
                 width: 100,
                 height: 100,
                 fit: BoxFit.cover,
@@ -53,7 +58,7 @@ class PeopleCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: Text(
-                person.name,
+                _person.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: CustomTextStyles.textStyle12,
@@ -66,7 +71,7 @@ class PeopleCard extends StatelessWidget {
                 const Icon(Icons.star, color: MainColors.ratingColor, size: 8),
                 const SizedBox(width: 4),
                 Text(
-                  person.popularity.toStringAsFixed(1),
+                  _person.popularity.toStringAsFixed(1),
                   style: CustomTextStyles.textStyle10,
                 ),
               ],

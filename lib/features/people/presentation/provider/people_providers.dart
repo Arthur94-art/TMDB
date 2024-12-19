@@ -13,8 +13,10 @@ import 'package:tmdb/features/people/presentation/provider/people_paginate.dart'
 // Remote DataSource
 final peopleRemoteDataSourceProvider =
     Provider<BaseRemoteDataSource<PeopleModel>>((ref) {
-  return PeopleRemoteDataSourceImpl(
-      ref.watch(apiClientProvider), (json) => PeopleModel.fromJson(json));
+  return PeopleRemoteDataSourceImpl(BaseRemoteDataSourceImpl(
+    ref.watch(apiClientProvider),
+    (json) => PeopleModel.fromJson(json),
+  ));
 });
 
 // BaseRepository

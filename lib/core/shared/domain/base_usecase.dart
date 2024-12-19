@@ -6,7 +6,7 @@ abstract class BaseUsecase<T, BaseParams> {
   Future<Either<Failure, List<T>>> call(BaseParams params);
 }
 
-class BaseUseCaseImpl<T> extends BaseUsecase<T, BaseParams> {
+class BaseUseCaseImpl<T> implements BaseUsecase<T, BaseParams> {
   final BaseRepository<T> repository;
 
   BaseUseCaseImpl(this.repository);

@@ -6,7 +6,7 @@ import 'package:tmdb/core/shared/data/base_remote_data_source.dart';
 import 'package:tmdb/core/shared/data/base_repository.dart';
 import 'package:tmdb/features/movies/domain/entities/movie_entity.dart';
 
-class MovieRepositoryImpl extends BaseRepository<MovieEntity> {
+class MovieRepositoryImpl implements BaseRepository<MovieEntity> {
   final BaseRemoteDataSource<MovieEntity> _dataSource;
 
   MovieRepositoryImpl(this._dataSource);

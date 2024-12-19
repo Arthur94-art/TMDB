@@ -4,7 +4,7 @@ import 'package:tmdb/core/shared/data/base_repository.dart';
 import 'package:tmdb/core/shared/domain/base_usecase.dart';
 import 'package:tmdb/features/movies/domain/entities/movie_entity.dart';
 
-class GetMoviesUsecase extends BaseUsecase<MovieEntity, BaseParams> {
+class GetMoviesUsecase implements BaseUsecase<MovieEntity, BaseParams> {
   final BaseRepository<MovieEntity> _repository;
 
   GetMoviesUsecase(this._repository);

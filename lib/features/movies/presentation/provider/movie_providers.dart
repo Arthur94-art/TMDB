@@ -13,10 +13,10 @@ import 'package:tmdb/features/movies/presentation/provider/movie_paginate.dart';
 // Remote DataSource
 final movieRemoteDataSourceProvider =
     Provider<BaseRemoteDataSource<MovieModel>>((ref) {
-  return MovieRemoteDataSource(
+  return MovieRemoteDataSource(BaseRemoteDataSourceImpl(
     ref.watch(apiClientProvider),
     (json) => MovieModel.fromJson(json),
-  );
+  ));
 });
 
 // BaseRepository

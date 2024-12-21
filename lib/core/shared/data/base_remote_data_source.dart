@@ -1,25 +1,28 @@
 import 'package:tmdb/core/api/client.dart';
+import 'package:tmdb/core/shared/domain/base_params.dart';
 
 abstract class BaseRemoteDataSource<T> {
-  Future<List<T>> getItems(String path, {int page = 1});
+  Future<T> fetch(String path, BaseParams params,
+      T Function(Map<String, dynamic> json) parser);
 }
 
 class BaseRemoteDataSourceImpl<T> implements BaseRemoteDataSource<T> {
   final ApiClient _apiClient;
-  final T Function(Map<String, dynamic> json) fromJson;
 
-  BaseRemoteDataSourceImpl(this._apiClient, this.fromJson);
+  BaseRemoteDataSourceImpl(this._apiClient);
 
   @override
-  Future<List<T>> getItems(String path, {int page = 1}) async {
+  Future<T> fetch(
+    String path,
+    BaseParams params,
+    Function(Map<String, dynamic> json) parser,
+  ) async {
     try {
       final response = await _apiClient.get(
         path,
-        queryParams: {'page': page},
+        queryParams: params.params,
       );
-      return (response.data['results'] as List)
-          .map((json) => fromJson(json))
-          .toList();
+      return parser(response.data);
     } catch (e) {
       rethrow;
     }

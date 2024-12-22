@@ -21,7 +21,7 @@ class BaseNotifier<T> extends StateNotifier<AsyncValue<T>> {
         _isLoading = false;
       },
       (items) {
-        state = AsyncValue.data(items); // Виправлення, щоб уникнути кастування
+        state = AsyncValue.data(items);
       },
     );
 

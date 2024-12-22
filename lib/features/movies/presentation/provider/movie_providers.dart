@@ -80,9 +80,9 @@ final movieUsecasesProvider = Provider<BaseUsecase<List<MovieEntity>>>(
 final movieDetailUsecaseProvider =
     Provider.family<BaseUsecase<MovieDetailEntity>, int>(
   (ref, id) {
-    return BaseUseCaseImpl(
-      ref.watch(
-        movieDetailRepositoryProvider(id),
+    return GetDetailMovieUsecase(
+      BaseUseCaseImpl(
+        ref.watch(movieDetailRepositoryProvider(id)),
       ),
     );
   },
@@ -93,5 +93,12 @@ final paginatedMoviesProvider = StateNotifierProvider<PaginatedMoviesNotifier,
     AsyncValue<List<MovieEntity>>>(
   (ref) => PaginatedMoviesNotifier(
     ref.watch(movieUsecasesProvider),
+  ),
+);
+final detailMoviesProvider = StateNotifierProvider.family<BaseMoviesNotifier,
+    AsyncValue<MovieDetailEntity>, int>(
+  (ref, id) => BaseMoviesNotifier(
+    ref.watch(movieDetailUsecaseProvider(id)),
+    id,
   ),
 );

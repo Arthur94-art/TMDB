@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:tmdb/core/error/failures.dart';
 import 'package:tmdb/core/shared/domain/base_params.dart';
 import 'package:tmdb/core/shared/domain/base_usecase.dart';
+import 'package:tmdb/features/movies/domain/entities/movie_detail_entity.dart';
 import 'package:tmdb/features/movies/domain/entities/movie_entity.dart';
 
 class GetMoviesUsecase implements BaseUsecase<List<MovieEntity>> {
@@ -15,11 +16,11 @@ class GetMoviesUsecase implements BaseUsecase<List<MovieEntity>> {
   }
 }
 
-class GetDetailMovieUsecase implements BaseUsecase<MovieEntity> {
-  final BaseUsecase<MovieEntity> _useCase;
+class GetDetailMovieUsecase implements BaseUsecase<MovieDetailEntity> {
+  final BaseUsecase<MovieDetailEntity> _useCase;
   GetDetailMovieUsecase(this._useCase);
   @override
-  Future<Either<Failure, MovieEntity>> call(BaseParams params) async {
+  Future<Either<Failure, MovieDetailEntity>> call(BaseParams params) async {
     return await _useCase(params);
   }
 }

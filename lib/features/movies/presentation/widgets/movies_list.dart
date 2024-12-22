@@ -33,7 +33,11 @@ class MovieList extends StatelessWidget {
                   }
                   final movie = movies[index];
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      ref
+                          .read(detailMoviesProvider(movie.id).notifier)
+                          .fetchNextPage();
+                    },
                     child: MovieCardWidget(
                       key: ValueKey(movie.id),
                       posterPath: movie.posterPath,

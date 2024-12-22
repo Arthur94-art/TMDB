@@ -5,6 +5,7 @@ import 'package:tmdb/core/shared/data/base_repository.dart';
 import 'package:tmdb/core/shared/domain/base_params.dart';
 import 'package:tmdb/core/shared/domain/base_usecase.dart';
 import 'package:tmdb/core/shared/providers/api_client_provider.dart';
+import 'package:tmdb/core/utils/json_parsers.dart';
 import 'package:tmdb/features/movies/data/models/movie_result_model.dart';
 import 'package:tmdb/features/movies/data/repositories/moview_repository_impl.dart';
 import 'package:tmdb/features/movies/domain/entities/movie_entity.dart';
@@ -24,11 +25,7 @@ final movieRepositoryProvider =
     BaseRepositoryImpl(
       ref.watch(movieDataSourceProvider),
       ApiPaths.topRatedMovies,
-      (json) {
-        return (json['results'] as List)
-            .map((item) => MovieModel.fromJson(item))
-            .toList();
-      },
+      (json) => JsonParsers.movieListParser(json),
       MovieListParams(),
     ),
   );
@@ -42,5 +39,9 @@ final movieUsecasesProvider = Provider<BaseUsecase<List<MovieEntity>>>((ref) {
 
 // Paginated StateNotifier
 final paginatedMoviesProvider = StateNotifierProvider<PaginatedMoviesNotifier,
-        AsyncValue<List<MovieEntity>>>(
-    (ref) => PaginatedMoviesNotifier(ref.watch(movieUsecasesProvider)));
+    AsyncValue<List<MovieEntity>>>(
+  (ref) => PaginatedMoviesNotifier(
+    ref.watch(movieUsecasesProvider),
+    MovieListParams(),
+  ),
+);

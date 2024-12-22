@@ -5,39 +5,14 @@ import 'package:tmdb/core/shared/data/base_repository.dart';
 import 'package:tmdb/core/shared/domain/base_params.dart';
 import 'package:tmdb/core/shared/domain/base_usecase.dart';
 import 'package:tmdb/core/shared/providers/api_client_provider.dart';
+import 'package:tmdb/core/utils/json_parsers.dart';
 import 'package:tmdb/features/people/data/models/people_model.dart';
 import 'package:tmdb/features/people/data/repositories/people_repository_impl.dart';
 import 'package:tmdb/features/people/domain/entities/people_entity.dart';
 import 'package:tmdb/features/people/domain/usecases/people_usecase.dart';
 import 'package:tmdb/features/people/presentation/provider/people_paginate.dart';
 
-// Remote DataSource
-// final peopleRemoteDataSourceProvider =
-//     Provider<BaseRemoteDataSource<PeopleModel>>((ref) {
-//   return PeopleRemoteDataSourceImpl(BaseRemoteDataSourceImpl(
-//     ref.watch(apiClientProvider),
-//     (json) => PeopleModel.fromJson(json),
-//   ));
-// });
-
-// // BaseRepository
-// final peopleRepositoryProvider = Provider<BaseRepository<PeopleEntity>>((ref) {
-//   return PeopleRepositoryImpl(ref.watch(peopleRemoteDataSourceProvider));
-// });
-
-// // UseCase
-// final getPeopleUseCaseProvider =
-//     Provider<BaseUsecase<PeopleEntity, BaseParams>>((ref) {
-//   return GetPeopleUsecase(ref.watch(peopleRepositoryProvider));
-// });
-
-// Paginated StateNotifier
-// final paginatedPeopleProvider = StateNotifierProvider<PaginatedPeopleNotifier,
-//     AsyncValue<List<PeopleEntity>>>((ref) {
-//   return PaginatedPeopleNotifier(ref.watch(getPeopleUseCaseProvider));
-// });
-
-//remote data osurce
+//remote data sosurce
 
 final peopleRemoteDataSourcProvider =
     Provider<BaseRemoteDataSource<List<PeopleModel>>>((ref) {
@@ -52,11 +27,7 @@ final peopleRepositoryProvider = Provider<BaseRepository<List<PeopleEntity>>>(
       BaseRepositoryImpl(
         ref.watch(peopleRemoteDataSourcProvider),
         ApiPaths.popularPeople,
-        (json) {
-          return (json['results'] as List)
-              .map((e) => PeopleModel.fromJson(e))
-              .toList();
-        },
+        (json) => JsonParsers.peopleListParser(json),
         PeopleListParams(),
       ),
     );
@@ -72,5 +43,8 @@ final peopleUsecaseProvider = Provider<BaseUsecase<List<PeopleEntity>>>((ref) {
 
 final paginatedPeopleProvider = StateNotifierProvider<PaginatedPeopleNotifier,
     AsyncValue<List<PeopleEntity>>>((ref) {
-  return PaginatedPeopleNotifier(ref.watch(peopleUsecaseProvider));
+  return PaginatedPeopleNotifier(
+    ref.watch(peopleUsecaseProvider),
+    PeopleListParams(),
+  );
 });

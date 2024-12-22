@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/gen/assets.gen.dart';
-import 'package:tmdb/home.dart';
+import 'package:tmdb/riverpod/future_provider/future_provider_widget.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: Assets.aEnv);
@@ -20,7 +20,7 @@ class Main extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const FutureProviderWidget(),
     );
   }
 }

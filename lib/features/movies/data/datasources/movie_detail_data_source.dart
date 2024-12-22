@@ -4,8 +4,7 @@ import 'package:tmdb/features/movies/data/models/movie_detail_model.dart';
 
 class MovieDetailDataSource implements BaseRemoteDataSource<MovieDetailModel> {
   final BaseRemoteDataSource<MovieDetailModel> _dataSource;
-  final int _id;
-  MovieDetailDataSource(this._dataSource, this._id);
+  MovieDetailDataSource(this._dataSource);
 
   @override
   Future<MovieDetailModel> fetch(String path, BaseParams params,

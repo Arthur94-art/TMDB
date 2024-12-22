@@ -1,3 +1,4 @@
+import 'package:tmdb/features/movies/data/models/movie_detail_model.dart';
 import 'package:tmdb/features/movies/data/models/movie_result_model.dart';
 import 'package:tmdb/features/people/data/models/people_model.dart';
 
@@ -12,5 +13,9 @@ class JsonParsers {
     return (json['results'] as List)
         .map((e) => MovieModel.fromJson(e))
         .toList();
+  }
+
+  static MovieDetailModel movieModelParser(json) {
+    return MovieDetailModel.fromJson(json as Map<String, dynamic>);
   }
 }

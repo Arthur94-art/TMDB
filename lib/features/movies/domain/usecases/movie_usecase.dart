@@ -13,3 +13,12 @@ class GetMoviesUsecase implements BaseUsecase<List<MovieEntity>> {
     return await _usecase();
   }
 }
+
+class GetDetailMovieUsecase implements BaseUsecase<MovieEntity> {
+  final BaseUsecase<MovieEntity> _useCase;
+  GetDetailMovieUsecase(this._useCase);
+  @override
+  Future<Either<Failure, MovieEntity>> call() async {
+    return await _useCase();
+  }
+}

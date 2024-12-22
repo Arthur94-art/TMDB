@@ -20,8 +20,10 @@ class PaginatedNotifier<T> extends StateNotifier<AsyncValue<List<T>>> {
 
     final result = await _useCase();
     result.fold(
-      (failure) =>
-          state = AsyncValue.error(failure.message, StackTrace.current),
+      (failure) {
+        state = AsyncValue.error(failure.message, StackTrace.current);
+        _isLoading = false;
+      },
       (items) {
         final List<T> newItems = [...state.value ?? [], ...items];
         state = AsyncValue.data(newItems);

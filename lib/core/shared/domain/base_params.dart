@@ -42,3 +42,23 @@ class PeopleListParams extends BaseParams {
     _params = params;
   }
 }
+
+class MovieDetailParams extends BaseParams {
+  static final MovieDetailParams _instance = MovieDetailParams._internal();
+
+  MovieDetailParams._internal();
+
+  factory MovieDetailParams() {
+    return _instance;
+  }
+
+  Map<String, dynamic> _params = {'id': 0};
+
+  @override
+  Map<String, dynamic> get params => _params;
+
+  @override
+  set setParams(Map<String, dynamic> params) {
+    _params = params;
+  }
+}

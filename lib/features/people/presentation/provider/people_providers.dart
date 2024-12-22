@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb/core/api/api_paths.dart';
 import 'package:tmdb/core/shared/data/base_remote_data_source.dart';
 import 'package:tmdb/core/shared/data/base_repository.dart';
-import 'package:tmdb/core/shared/domain/base_params.dart';
 import 'package:tmdb/core/shared/domain/base_usecase.dart';
 import 'package:tmdb/core/shared/providers/api_client_provider.dart';
 import 'package:tmdb/core/utils/json_parsers.dart';
@@ -28,7 +27,6 @@ final peopleRepositoryProvider = Provider<BaseRepository<List<PeopleEntity>>>(
         ref.watch(peopleRemoteDataSourcProvider),
         ApiPaths.popularPeople,
         (json) => JsonParsers.peopleListParser(json),
-        PeopleListParams(),
       ),
     );
   },
@@ -45,6 +43,5 @@ final paginatedPeopleProvider = StateNotifierProvider<PaginatedPeopleNotifier,
     AsyncValue<List<PeopleEntity>>>((ref) {
   return PaginatedPeopleNotifier(
     ref.watch(peopleUsecaseProvider),
-    PeopleListParams(),
   );
 });

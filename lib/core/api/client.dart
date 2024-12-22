@@ -17,7 +17,8 @@ class ApiClient {
     queryParams['language'] = 'en-US';
 
     try {
-      return await _dio.get(endpoint, queryParameters: queryParams);
+      final response = await _dio.get(endpoint, queryParameters: queryParams);
+      return response;
     } on DioException catch (e) {
       _handleDioError(e);
     } catch (e) {

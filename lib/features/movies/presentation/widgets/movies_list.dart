@@ -32,11 +32,14 @@ class MovieList extends StatelessWidget {
                     return const ShimmerCard();
                   }
                   final movie = movies[index];
-                  return MovieCardWidget(
-                    key: ValueKey(movie.id),
-                    posterPath: movie.posterPath,
-                    title: movie.title,
-                    rating: movie.voteAverage,
+                  return GestureDetector(
+                    onTap: () {},
+                    child: MovieCardWidget(
+                      key: ValueKey(movie.id),
+                      posterPath: movie.posterPath,
+                      title: movie.title,
+                      rating: movie.voteAverage,
+                    ),
                   );
                 },
                 childCount: movies.length,

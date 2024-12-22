@@ -2,15 +2,16 @@ import 'package:dartz/dartz.dart';
 import 'package:tmdb/core/error/error_mapper.dart';
 import 'package:tmdb/core/error/failures.dart';
 import 'package:tmdb/core/shared/data/base_repository.dart';
+import 'package:tmdb/core/shared/domain/base_params.dart';
 import 'package:tmdb/features/movies/domain/entities/movie_detail_entity.dart';
 
 class MovieDetailRepository implements BaseRepository<MovieDetailEntity> {
   final BaseRepository<MovieDetailEntity> _repository;
   MovieDetailRepository(this._repository);
   @override
-  Future<Either<Failure, MovieDetailEntity>> fetch() async {
+  Future<Either<Failure, MovieDetailEntity>> fetch(BaseParams params) async {
     try {
-      return await _repository.fetch();
+      return await _repository.fetch(params);
     } catch (e) {
       final failure = ErrorMapper.mapExceptionToFailure(e as Exception);
       return Left(failure);

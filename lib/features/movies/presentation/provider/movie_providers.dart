@@ -14,6 +14,7 @@ import 'package:tmdb/features/movies/data/repositories/moview_repository_impl.da
 import 'package:tmdb/features/movies/domain/entities/movie_detail_entity.dart';
 import 'package:tmdb/features/movies/domain/entities/movie_entity.dart';
 import 'package:tmdb/features/movies/domain/usecases/movie_usecase.dart';
+import 'package:tmdb/features/movies/presentation/provider/movie_notifire.dart';
 import 'package:tmdb/features/movies/presentation/provider/movie_paginate.dart';
 
 //DataSource
